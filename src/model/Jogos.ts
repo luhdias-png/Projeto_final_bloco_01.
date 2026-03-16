@@ -70,7 +70,7 @@ constructor(id: number, nome: string, valor: number, desconto: number, quantidad
             console.log(`Quantidade em estoque: ${this._quantidade}`);
             console.log(`Valor do game: R$${this._valor}`);
             console.log(`Valor do Desconto: ${this._desconto}%`);
-            console.log(`Valor total do game: R$${total}`);
+            console.log(`Valor real do game com desconto do game: R$${total}`);
         }
 
 

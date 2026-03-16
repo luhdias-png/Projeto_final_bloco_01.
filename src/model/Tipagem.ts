@@ -31,7 +31,7 @@ export class tipagem extends Pedidos{
     public visualizar(): void {
         super.visualizar();
         console.log("O genero do game é: " + this._tipo);
-        console.log("Recomendado para pessoas de " + this._idade," anos.");
+        console.log("Recomendado para pessoas de "+ this._idade," anos.");
         console.log("********************************************")
     }
 }

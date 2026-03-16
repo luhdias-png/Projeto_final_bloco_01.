@@ -1,9 +1,10 @@
 import { Pedidos } from "../model/Jogos"
+import { tipagem } from "../model/Tipagem"
 
-export interface InstrumentoRepository{
+export interface JogosRepository{
 
     cadastrar(jogos: Pedidos): void
     atualizar(jogos: Pedidos): void
     deletar(id: number): void
-    listagemm():void
+    listagem():void
 }

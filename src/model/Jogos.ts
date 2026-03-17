@@ -64,7 +64,6 @@ constructor(id: number, nome: string, valor: number, desconto: number, quantidad
             const total = this.valor * (1-this.desconto/100)
 
             console.log(`\n********************************************`);
-            console.log(`Cadastro de Games!`);
             console.log(`Id: ${this._id}`);
             console.log(`Nome: ${this._nome}`);
             console.log(`Quantidade em estoque: ${this._quantidade}`);

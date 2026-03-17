@@ -1,6 +1,5 @@
 import readlinesync = require("readline-sync");
 import { colors } from "./src/util/Colors";
-import { Pedidos } from "./src/model/Jogos";
 import { tipagem } from "./src/model/Tipagem";
 import { JogosController } from "./src/controller/JogosController";
 
@@ -10,19 +9,20 @@ function main() {
 
     while (true) {
 
-        console.log("\n*****************************************************");
-        console.log("                                                     ");
-        console.log("              GEN DOS GAMES - E-COMMERCE              ");
-        console.log("                                                     ");
+        console.log(colors.fg.cyan,"\n*****************************************************");
+        console.log("*                                                   *");
+        console.log("*             GEN DOS GAMES - E-COMMERCE            *");
+        console.log("*                                                   *");
         console.log("*****************************************************");
-        console.log("                                                     ");
-        console.log("            1 - Pedido de game.                      ");
-        console.log("            2 - Listar todos os game.                ");
-        console.log("            3 - Atualizar game                       ");
-        console.log("            4 - Excluir pedido de game.              ");
-        console.log("            0 - Sair                                 ");
-        console.log("                                                     ");
-        console.log("*****************************************************");
+        console.log("*                                                   *");
+        console.log("*           1 - Pedido de game.                     *");
+        console.log("*           2 - Listar todos os game.               *");
+        console.log("*           3 - Atualizar game                      *");
+        console.log("*           4 - Excluir pedido de game.             *");
+        console.log("*           5 - Buscar por Id.                      *");
+        console.log("*           0 - Sair                                *");
+        console.log("*                                                   *");
+        console.log("*****************************************************",colors.reset);
 
 
 
@@ -31,14 +31,23 @@ function main() {
 
         if (opcao == 0) {
             console.log("Obrigado por utilizar nossos serviços!");
+            sobre();
             break
         }
 
         switch (opcao) {
             case 1:
-                
-                console.log("Cadastrar um jogo");
-                const id =  readlinesync.questionInt("Digite o numero de identificacao (ID) do jogo: ");
+                while(true){ 
+                console.log(colors.fg.green,"**********************************************************");    
+                console.log(" *                 Cadastro de game.                      *");
+                console.log(" **********************************************************",colors.reset);                
+                const id =  readlinesync.questionInt("Digite o numero o Id do Jogo (IDs repetidos sao invalidos) do jogo: ");
+                const game = listaGames.buscarPorId(id);
+                    if(game){
+                        console.log("ID repetido!")
+                        continue
+                    }
+                    
                 const nome = readlinesync.question("Digite o nome do jogo: ");
                 const quantidade = readlinesync.questionInt("Qual a quantidade em estoque: ");
                 const valor = readlinesync.questionInt("Qual o valor do game: ");
@@ -48,22 +57,28 @@ function main() {
                 
                 let jogo = new tipagem(id, nome,valor,desconto,quantidade,idade,tipo);
                 listaGames.cadastrarJogo(jogo);
+                keyPress();
                 break;
+                }
             case 2:
-                console.log("Listar todos os jogos cadastrados: ");
+                console.log(colors.fg.blue,"**********************************************************");    
+                console.log(" *               Listar Jogos Cadastrado                  *");
+                console.log(" **********************************************************",colors.reset);
                 listaGames.listaDeJogos();
+                keyPress();
                 break;
             case 3:
                 try {
-                    console.log("Atualizar jogo!");
+                console.log(colors.fg.yellow,"**********************************************************");    
+                console.log(" *              Atualizar Cadastro de game.               *");
+                console.log(" **********************************************************",colors.reset);
 
                     const id = readlinesync.questionInt("Digite o ID do jogo que deseja atualizar: ");
                     const game = listaGames.buscarPorId(id);
                     if(!game){
                         console.log("ID nao encontrado!")
                         break
-                    }
-                    
+                    }                   
                     const nome = readlinesync.question("Digite o novo nome do jogo: ");
                     const quantidade = readlinesync.questionInt("Digite a nova quantidade em estoque: ");
                     const valor = readlinesync.questionInt("Digite o novo valor do jogo: ");
@@ -78,9 +93,32 @@ function main() {
                 } catch(error) {
                     console.log(error);
                 }
+                keyPress();
                 break
             case 4:
+                console.log(colors.fg.red,"**********************************************************");    
+                console.log(" *              Deletar Registro de Jogos.                *");
+                console.log(" **********************************************************",colors.reset);
                 listaGames.deletarJogo(readlinesync.questionInt("Digite o Id do Jogo para deletar: "))
+                keyPress();
+                break
+            case 5:
+                console.log(colors.fg.magenta,"**********************************************************");    
+                console.log(" *                     Buscar por Id                      *");
+                console.log(" **********************************************************",colors.reset);
+                const procurarId = readlinesync.questionInt("Digite o Id para procurar: ")
+                const achouId = listaGames.buscarPorId(procurarId);
+
+                    if(!achouId){
+                        console.log("ID nao encontrado!")
+                        keyPress();
+                        break
+                    }else{
+                        achouId.visualizar()
+                        keyPress();
+                        break
+                    }
+                
             default:
                 console.log("Opção inválida!");
                 keyPress();
@@ -90,17 +128,18 @@ function main() {
 }
 
 function sobre(): void {
-    console.log("\n*****************************************************");
+    console.log(colors.fg.cyan,"\n*****************************************************");
     console.log("Projeto Desenvolvido por: André Lucas Dias Lima ");
     console.log("Data: 16/03/2026");
     console.log("Generation Brasil - andre_lucas.94@hotmail.com");
     console.log("https://github.com/luhdias-png");
-    console.log("*****************************************************");
+    console.log("*****************************************************",colors.reset);
 }
 
 function keyPress(): void{
     console.log("\nPressione Enter para continuar...");
     readlinesync.prompt();
+    console.clear()
 }
 
 main();

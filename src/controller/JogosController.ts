@@ -1,5 +1,4 @@
 import { Pedidos } from "../model/Jogos"
-import { JogosRepository } from "../repository/JogosRepository"
 import { colors } from "../util/Colors";
 
 export class JogosController implements JogosController{
@@ -25,7 +24,6 @@ export class JogosController implements JogosController{
     }
 
     buscarPorId(id: number) {
-
     return this.listaJogos.find(jogo => jogo.id === id);
 
 }

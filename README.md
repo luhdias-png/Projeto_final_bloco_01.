@@ -176,3 +176,7 @@ Possíveis evoluções do sistema:
 # 👨‍💻 Autor
 
 Projeto desenvolvido para fins de aprendizado em **desenvolvimento de sistemas** pelo programa de bootcamp da Generation Brasil JS Turma 14.
+
+# 👨‍🏫 Professor da Turma
+
+Geandro e Felipe
